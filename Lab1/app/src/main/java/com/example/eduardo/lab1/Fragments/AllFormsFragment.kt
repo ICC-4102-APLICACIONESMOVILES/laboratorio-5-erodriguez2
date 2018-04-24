@@ -27,6 +27,7 @@ class AllFormsFragment : Fragment() {
     private lateinit var formDatabase: FormDatabase
     private lateinit var listForms: ListView
     private lateinit var listAdapter: FormAdapter
+    private val DATABASE_NAME = "form_db"
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -36,24 +37,21 @@ class AllFormsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         listForms = view.find(R.id.listForms)
-        val DATABASE_NAME = "form_db"
         formDatabase = Room.databaseBuilder(view.context,
                 FormDatabase::class.java, DATABASE_NAME)
                 .build()
 
-        Thread(Runnable {
-            @Override
-            fun run() {
-                val forms = formDatabase.daoAccess().getAllForms()
-                val arrayListForm = ArrayList(forms)
-                listAdapter = FormAdapter(view.context, R.layout.form_item_layout, arrayListForm)
 
-                val mainHandler = Handler(activity!!.mainLooper)
-                mainHandler.post({
-                    listForms.adapter = listAdapter
-                })
-            }
-        }) .start()
+        Thread(Runnable {
+            val forms = formDatabase.daoAccess().getAllForms()
+            val arrayListForm = ArrayList(forms)
+            listAdapter = FormAdapter(view.context, R.layout.form_item_layout, arrayListForm)
+
+            val mainHandler = Handler(activity!!.mainLooper)
+            mainHandler.post({
+                listForms.adapter = listAdapter
+            })
+        }).start()
     }
 
 }// Required empty public constructor

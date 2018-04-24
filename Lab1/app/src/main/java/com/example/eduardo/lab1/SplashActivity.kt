@@ -37,6 +37,7 @@ class SplashActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     private lateinit var toolbar: Toolbar
     private lateinit var actionbar: ActionBar
     private lateinit var mDrawerLayout: DrawerLayout
+    private lateinit var mMenuActionBar: ActionBar
     private lateinit var navigationView: NavigationView
 
     private lateinit var nameFormContent : EditText
@@ -80,6 +81,7 @@ class SplashActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         signOutButton = find(R.id.signOutButton)
         toolbar = find(R.id.toolbar)
         mDrawerLayout = find(R.id.drawer_layout)
+        mMenuActionBar = find(R.id.logout)
         navigationView = find(R.id.nav_view)
     }
 
@@ -134,18 +136,29 @@ class SplashActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                 Handler().postDelayed({
                     getUIReferencesAddForm()
                 }, 500L)
+                mDrawerLayout.closeDrawers()
             }
 
             R.id.nav_all_forms -> {
                 val fragmentTransaction = supportFragmentManager.beginTransaction()
                 fragmentTransaction.replace(R.id.frameLayoutContent, AllFormsFragment())
                 fragmentTransaction.commit()
+                mDrawerLayout.closeDrawers()
+                NetworkManager.getInstance(this).getForms(
+                        {response ->
+                            Toast.makeText(this, response.toString(), Toast.LENGTH_SHORT).show()
+                        },
+                        {
+                            Toast.makeText(this, "Error loading forms", Toast.LENGTH_SHORT).show()
+                        }
+                )
             }
 
             R.id.nav_resumen -> {
                 val fragmentTransaction = supportFragmentManager.beginTransaction()
                 fragmentTransaction.replace(R.id.frameLayoutContent, ResumenFormsFragment())
                 fragmentTransaction.commit()
+                mDrawerLayout.closeDrawers()
             }
         }
         return true

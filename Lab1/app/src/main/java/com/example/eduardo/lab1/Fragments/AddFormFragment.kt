@@ -63,16 +63,13 @@ class AddFormFragment : Fragment() {
     private fun setListeners(){
         addFormButton.setOnClickListener {
             Thread(Runnable {
-                @Override
-                fun run() {
-                    val form = Form()
-                    form.name = nameFormContent.text.toString()
-                    form.date = dateFormContent.text.toString()
-                    form.category = categoryFormContent.selectedItem.toString()
-                    form.comment = commentaryFormContent.text.toString()
-                    formDatabase.daoAccess().insertOnlySingleForm(form)
-                }
-            }) .start()
+                val form = Form()
+                form.name = nameFormContent.text.toString()
+                form.date = dateFormContent.text.toString()
+                form.category = categoryFormContent.selectedItem.toString()
+                form.comment = commentaryFormContent.text.toString()
+                formDatabase.daoAccess().insertOnlySingleForm(form)
+            }).start()
         }
     }
 

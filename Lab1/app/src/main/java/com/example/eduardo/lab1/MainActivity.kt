@@ -35,12 +35,6 @@ class MainActivity : AppCompatActivity() {
     private fun setupListeners(){
         signInButton.setOnClickListener {
             if(isEmailValid(userContent.text.toString())){
-                //Toast.makeText(this, "User Format Valid", Toast.LENGTH_SHORT).show()
-                //val returnIntent = Intent()
-                //returnIntent.putExtra("userEmail", userContent.text.toString())
-                //returnIntent.putExtra("userPassword", userContent.text.toString())
-                //setResult(Activity.RESULT_CANCELED, returnIntent)
-                //finish()
                 NetworkManager.getInstance(this).login(
                         userContent.text.toString(),
                         userPasswordContent.text.toString(),
@@ -54,7 +48,7 @@ class MainActivity : AppCompatActivity() {
                             finish()
                         },
                         {
-                            Toast.makeText(this, "---------ERROR-------", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, R.string.wrong_credentials, Toast.LENGTH_SHORT).show()
                         }
                 )
             }

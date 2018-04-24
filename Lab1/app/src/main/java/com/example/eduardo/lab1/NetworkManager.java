@@ -52,7 +52,7 @@ public class NetworkManager {
         return mRequestQueue;
     }
 
-    public void  login(String username, String password, final Response.Listener<JSONObject> responseListener,
+    public void login(String username, String password, final Response.Listener<JSONObject> responseListener,
                        Response.ErrorListener errorListener) throws JSONException {
 
         String url = BASE_URL + "users/sign_in/";
@@ -100,7 +100,7 @@ public class NetworkManager {
         makeApiCall(Request.Method.GET, url, null,listener, errorListener);
     }
 
-    private void makeApiCall(int method, String url, JSONObject payload, Response.Listener<JSONObject> listener,
+    private void makeApiCall(int method, String url, JSONObject payload, final Response.Listener<JSONObject> listener,
                              Response.ErrorListener errorListener){
 
         JsonObjectArrayRequest jsonObjectRequest = new JsonObjectArrayRequest
@@ -111,6 +111,7 @@ public class NetworkManager {
                 headers.put("Authorization", token);
                 return headers;
             }
+
         };
         mRequestQueue.add(jsonObjectRequest);
     }

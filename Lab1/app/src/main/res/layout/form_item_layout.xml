@@ -7,16 +7,22 @@
     <TextView
         android:id="@+id/nameForm"
         android:layout_width="match_parent"
-        android:layout_height="20dp" />
+        android:layout_height="20dp"
+        android:background="@color/white"
+        android:layout_margin="5dp"/>
 
     <TextView
         android:id="@+id/dateForm"
         android:layout_width="match_parent"
-        android:layout_height="20dp" />
+        android:layout_height="20dp"
+        android:background="@color/white"
+        android:layout_margin="5dp"/>
 
     <TextView
         android:id="@+id/commentForm"
         android:layout_width="match_parent"
-        android:layout_height="20dp" />
+        android:layout_height="20dp"
+        android:background="@color/white"
+        android:layout_margin="5dp"/>
 
 </LinearLayout>

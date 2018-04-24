@@ -24,19 +24,24 @@ class FormAdapter(private val mContext: Context, resource: Int, list: ArrayList<
     }
 
     override fun getView(position: Int, @Nullable view: View?, parent: ViewGroup): View {
+
         var listItem = view
+
+        if (listItem == null) {
+            listItem = LayoutInflater.from(context).inflate(R.layout.form_item_layout, parent, false)
+        }
 
         val currentForm = formsList[position]
         Log.d("currentForm", currentForm.toString())
 
         val name = listItem!!.find(R.id.nameForm) as TextView
-        name.text = currentForm.name
+        name.text = "Nombre: " + currentForm.name
 
         val date = listItem!!.find(R.id.dateForm) as TextView
-        date.text = currentForm.date
+        date.text = "Fecha: " + currentForm.date
 
         val comment = listItem!!.find(R.id.commentForm) as TextView
-        comment.text = currentForm.comment
+        comment.text = "Comentario: " + currentForm.comment
 
         return listItem
     }
