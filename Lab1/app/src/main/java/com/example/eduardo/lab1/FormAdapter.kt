@@ -14,7 +14,7 @@ import android.util.Log
 import org.jetbrains.anko.find
 
 
-class FormAdapter(private val mContext: Context, resource: Int, list: ArrayList<Form>) : ArrayAdapter<Form>(mContext, resource, list) {
+class FormAdapter(mContext: Context, resource: Int, list: ArrayList<Form>) : ArrayAdapter<Form>(mContext, resource, list) {
     private var formsList = ArrayList<Form>()
     private var resourceLayout = 0
 

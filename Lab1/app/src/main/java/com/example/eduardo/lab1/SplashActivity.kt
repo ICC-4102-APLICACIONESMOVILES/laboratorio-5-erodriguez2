@@ -13,6 +13,7 @@ import android.support.v4.view.GravityCompat
 import android.view.MenuItem
 import android.support.annotation.NonNull
 import android.support.design.widget.NavigationView
+import android.view.Menu
 import android.widget.*
 import com.example.eduardo.lab1.Fragments.AddFormFragment
 import com.example.eduardo.lab1.Fragments.AllFormsFragment
@@ -37,7 +38,6 @@ class SplashActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     private lateinit var toolbar: Toolbar
     private lateinit var actionbar: ActionBar
     private lateinit var mDrawerLayout: DrawerLayout
-    private lateinit var mMenuActionBar: ActionBar
     private lateinit var navigationView: NavigationView
 
     private lateinit var nameFormContent : EditText
@@ -74,6 +74,13 @@ class SplashActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         showInfo(token)
         setupNavHeaders(email)
         setupBarElements()
+        setSupportActionBar(toolbar)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.main_menu, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 
     private fun getUIReferences(){
@@ -81,16 +88,12 @@ class SplashActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         signOutButton = find(R.id.signOutButton)
         toolbar = find(R.id.toolbar)
         mDrawerLayout = find(R.id.drawer_layout)
-        mMenuActionBar = find(R.id.logout)
         navigationView = find(R.id.nav_view)
     }
 
     private fun setupListeners(){
         signOutButton.setOnClickListener{
-            credentialsManager.setEmail(DEFAULT_VALUE)
-            credentialsManager.setPassword(DEFAULT_VALUE)
-            showMessage("Sesion finalizada")
-            startActivityForResult(Intent(this,MainActivity::class.java), 1)
+            signOut()
         }
 
         mDrawerLayout.addDrawerListener(
@@ -116,11 +119,22 @@ class SplashActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         navigationView.setNavigationItemSelectedListener(this)
     }
 
+    fun signOut(){
+        credentialsManager.setEmail(DEFAULT_VALUE)
+        credentialsManager.setPassword(DEFAULT_VALUE)
+        showMessage("Sesion finalizada")
+        startActivityForResult(Intent(this,MainActivity::class.java), 1)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
                 mDrawerLayout.openDrawer(GravityCompat.START)
                 return true
+            }
+
+            R.id.logoutItemMenu -> {
+                signOut()
             }
         }
         return super.onOptionsItemSelected(item)
