@@ -8,9 +8,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.ListView
-import com.example.eduardo.lab1.Form
 import com.example.eduardo.lab1.FormAdapter
 import com.example.eduardo.lab1.FormDatabase
 

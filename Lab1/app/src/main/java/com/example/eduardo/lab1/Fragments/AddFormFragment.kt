@@ -11,11 +11,10 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
-import com.example.eduardo.lab1.Form
+import com.example.eduardo.lab1.Models.Form
 import com.example.eduardo.lab1.FormDatabase
 
 import com.example.eduardo.lab1.R
-import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.find
 
 

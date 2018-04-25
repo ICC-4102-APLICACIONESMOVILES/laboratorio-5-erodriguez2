@@ -1,9 +1,7 @@
-package com.example.eduardo.lab1
+package com.example.eduardo.lab1.Models
 
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
-import android.support.annotation.NonNull
-
 
 @Entity
 class Form {
